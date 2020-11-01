@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hello-secret
+type: Opaque
+data:
+  DATABASE_URL: {{ printf "postgresql://%s:%s@%s:%s/%s" .Values.postgresql.postgresqlUsername .Values.postgresql.postgresqlPassword (include "postgresql.fullname" .) .Values.postgresql.postgresqlPort .Values.postgresql.postgresqlDatabase  | b64enc | quote }}
